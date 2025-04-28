@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>WebSharper.SortableJs.Sample</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="Content/WebSharper.SortableJs.Sample.css" />
+    <style>
+        /* Don't show the not-yet-loaded templates */
+        [ws-template], [ws-children-template] { display: none; }
+        .list-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        ul {
+            width: 200px;
+            min-height: 200px;
+            padding: 10px;
+            border: 2px dashed gray;
+            list-style: none;
+        }
+
+        li {
+            padding: 10px;
+            margin: 5px 0;
+            background: lightcoral;
+            cursor: grab;
+        }
+    </style>
+    <script type="module" src="Content/WebSharper.SortableJs.Sample.head.js"></script>
+</head>
+<body>
+    <h1>SortableJS: Move Items Between Lists</h1>
+    <div id="main" ws-children-template="Main">
+        <div ws-onafterrender="ListContainerInit">
+            <div class="list-container">
+                <ul id="list1">
+                    <li>Apple</li>
+                    <li>Banana</li>
+                    <li>Orange</li>
+                </ul>
+
+                <ul id="list2">
+                    <li>Carrot</li>
+                    <li>Potato</li>
+                    <li>Tomato</li>
+                </ul>
+            </div>
+
+        </div>
+        <button ws-onclick="SaveOrder">Save Order</button>
+    </div>
+    <script type="module" src="Content/WebSharper.SortableJs.Sample.min.js"></script>
+</body>
+</html>

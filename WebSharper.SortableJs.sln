@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.SortableJs", "WebSharper.SortableJs\WebSharper.SortableJs.fsproj", "{4BEA920B-96ED-454F-8E85-9E33F1FBB4A1}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "WebSharper.SortableJs.Sample", "WebSharper.SortableJs.Sample\WebSharper.SortableJs.Sample.fsproj", "{1CD2C6CF-F266-4BB5-A045-6669EF2F5866}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4BEA920B-96ED-454F-8E85-9E33F1FBB4A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BEA920B-96ED-454F-8E85-9E33F1FBB4A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BEA920B-96ED-454F-8E85-9E33F1FBB4A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BEA920B-96ED-454F-8E85-9E33F1FBB4A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1CD2C6CF-F266-4BB5-A045-6669EF2F5866}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1CD2C6CF-F266-4BB5-A045-6669EF2F5866}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1CD2C6CF-F266-4BB5-A045-6669EF2F5866}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1CD2C6CF-F266-4BB5-A045-6669EF2F5866}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FE2A05EA-EB38-4E57-9566-D754699851ED}
+	EndGlobalSection
+EndGlobal

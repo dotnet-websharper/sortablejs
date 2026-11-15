@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WebSharper.SortableJs — sample</title>
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' rx='3' fill='%234f46e5'/%3E%3Crect x='3.5' y='3' width='9' height='1.8' rx='0.9' fill='white'/%3E%3Crect x='3.5' y='7.1' width='9' height='1.8' rx='0.9' fill='white'/%3E%3Crect x='3.5' y='11.2' width='9' height='1.8' rx='0.9' fill='white'/%3E%3C/svg%3E" />
+    <script>
+        // Apply a previously chosen theme before first paint. Light is the
+        // default; the key is shared with Client.fs (themeStorageKey).
+        try {
+            var t = localStorage.getItem('websharper-sortablejs-theme');
+            if (t === 'dark' || t === 'light') document.documentElement.setAttribute('data-theme', t);
+        } catch (e) { }
+    </script>
+    <link rel="stylesheet" href="site.css" />
+    <!-- ws-head -->
+</head>
+<body>
+    <header class="app-header">
+        <div class="app-titles">
+            <h1>WebSharper.SortableJs</h1>
+            <p>SortableJS 1.15 bindings for F# — with <a href="https://websharper.com">WebSharper</a></p>
+        </div>
+        <div class="app-actions">
+            <button class="btn theme-toggle" ws-onclick="ToggleTheme" title="Switch between the light and dark theme">
+                <span>${themeLabel}</span>
+            </button>
+            <a class="app-source" href="https://github.com/dotnet-websharper/sortablejs">Source</a>
+        </div>
+    </header>
+
+    <main class="page">
+        <p class="status">${status}</p>
+        <p class="hint">SortableJS ${version}</p>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>One group, three lists</h2>
+                <p>
+                    <code>Sortable.Create(el, Options(Group = GroupOptions("board")))</code> with
+                    <code>Animation</code>, <code>GhostClass</code>, <code>Handle</code>,
+                    <code>Filter</code>, <code>DataIdAttr</code> and the full listener set.
+                    Drag the <code>⠿</code> grip; the pinned chips are filtered out.
+                </p>
+            </header>
+            <div class="board">
+                <div class="column">
+                    <h3>To do</h3>
+                    <ul id="todo" class="sortable-list">
+                        <li data-id="t1"><span class="grip">≡</span>Write the binding</li>
+                        <li data-id="t2"><span class="grip">≡</span>Add the sample</li>
+                        <li data-id="t3" class="pinned"><span class="pin">📌</span>Pinned (filtered)</li>
+                        <li data-id="t4"><span class="grip">≡</span>Ship it</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Doing</h3>
+                    <ul id="doing" class="sortable-list">
+                        <li data-id="d1"><span class="grip">≡</span>Verify in the browser</li>
+                        <li data-id="d2"><span class="grip">≡</span>Write the README</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Done</h3>
+                    <ul id="done" class="sortable-list">
+                        <li data-id="k1"><span class="grip">≡</span>Bump SortableJS</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="CreateBoard">Create board</button>
+                <button class="btn" ws-onclick="DestroyBoard">Destroy board</button>
+                <button class="btn" ws-onclick="SaveOrder">Save order</button>
+                <button class="btn" ws-onclick="RestoreOrder">Restore order</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Plugins: MultiDrag and Swap</h2>
+                <p>
+                    <code>Sortable.Mount(MultiDrag(), Swap())</code> plugs in the two plugins that the
+                    <code>sortablejs</code> package does not mount for you. In the first list,
+                    <kbd>Ctrl</kbd>-click several items (or shift-click a range) and drag them
+                    together. In the second list, drop an item onto another one to swap them.
+                </p>
+            </header>
+            <div class="board">
+                <div class="column">
+                    <h3>MultiDrag</h3>
+                    <ul id="multi" class="sortable-list multi">
+                        <li data-id="m1"><span class="grip">≡</span>Alpha</li>
+                        <li data-id="m2"><span class="grip">≡</span>Beta</li>
+                        <li data-id="m3"><span class="grip">≡</span>Gamma</li>
+                        <li data-id="m4"><span class="grip">≡</span>Delta</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>Swap</h3>
+                    <ul id="swap" class="sortable-list swap">
+                        <li data-id="s1">One</li>
+                        <li data-id="s2">Two</li>
+                        <li data-id="s3">Three</li>
+                        <li data-id="s4">Four</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="MountPlugins">Mount plugins</button>
+                <button class="btn" ws-onclick="DestroyPlugins">Destroy plugin lists</button>
+                <button class="btn" ws-onclick="SelectAll">utils.select ×2</button>
+                <button class="btn" ws-onclick="DeselectAll">utils.deselect ×2</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>OnSpill: revert and remove</h2>
+                <p>
+                    <code>RevertOnSpill = true</code> puts a spilled item back where it started;
+                    <code>RemoveOnSpill = true</code> removes it from the DOM. Both plugins are
+                    already mounted by the <code>sortablejs</code> entry point — drag an item out of a
+                    list and drop it on this paragraph.
+                </p>
+            </header>
+            <div class="board">
+                <div class="column">
+                    <h3>revertOnSpill</h3>
+                    <ul id="spill-revert" class="sortable-list spill">
+                        <li data-id="r1">Revert me 1</li>
+                        <li data-id="r2">Revert me 2</li>
+                        <li data-id="r3">Revert me 3</li>
+                    </ul>
+                </div>
+                <div class="column">
+                    <h3>removeOnSpill</h3>
+                    <ul id="spill-remove" class="sortable-list spill">
+                        <li data-id="x1">Remove me 1</li>
+                        <li data-id="x2">Remove me 2</li>
+                        <li data-id="x3">Remove me 3</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="CreateSpillLists">Create spill lists</button>
+                <button class="btn" ws-onclick="DestroySpillLists">Destroy spill lists</button>
+                <button class="btn" ws-onclick="ResetSpillLists">Reset items</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>AutoScroll</h2>
+                <p>
+                    <code>Scroll = true</code>, <code>ScrollSensitivity</code>, <code>ScrollSpeed</code>,
+                    <code>BubbleScroll</code> and <code>ForceAutoScrollFallback</code> drive the
+                    AutoScroll plugin. Drag an item to the top or bottom edge of the box.
+                </p>
+            </header>
+            <div class="scroll-box">
+                <ul id="scroll" class="sortable-list scroll-list">
+                    <li data-id="a1">Item 1</li>
+                    <li data-id="a2">Item 2</li>
+                    <li data-id="a3">Item 3</li>
+                    <li data-id="a4">Item 4</li>
+                    <li data-id="a5">Item 5</li>
+                    <li data-id="a6">Item 6</li>
+                    <li data-id="a7">Item 7</li>
+                    <li data-id="a8">Item 8</li>
+                    <li data-id="a9">Item 9</li>
+                    <li data-id="a10">Item 10</li>
+                    <li data-id="a11">Item 11</li>
+                    <li data-id="a12">Item 12</li>
+                    <li data-id="a13">Item 13</li>
+                    <li data-id="a14">Item 14</li>
+                </ul>
+            </div>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="CreateScrollList">Create scroll list</button>
+                <button class="btn" ws-onclick="DestroyScrollList">Destroy scroll list</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Instance API</h2>
+                <p>
+                    <code>toArray</code>, <code>sort</code>, <code>save</code> (with the
+                    <code>store</code> option), <code>option</code>, <code>closest</code>, and the
+                    statics <code>active</code>, <code>get</code>, <code>dragged</code>,
+                    <code>ghost</code>, <code>clone</code>, <code>version</code>.
+                </p>
+            </header>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="ToArray">toArray()</button>
+                <button class="btn" ws-onclick="SortReversed">sort(reversed)</button>
+                <button class="btn" ws-onclick="SortById">sort(by data-id)</button>
+                <button class="btn" ws-onclick="SaveStore">save()</button>
+                <button class="btn" ws-onclick="OptionGetSet">option get/set</button>
+                <button class="btn" ws-onclick="Inspect">statics</button>
+                <button class="btn" ws-onclick="ClosestFromItem">closest()</button>
+                <button class="btn" ws-onclick="NewInstance">new Sortable(el, …)</button>
+            </div>
+            <pre class="readout">${info}</pre>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Sortable.utils</h2>
+                <p>
+                    The DOM helpers SortableJS exposes as <code>Sortable.utils</code>:
+                    <code>on</code>, <code>off</code>, <code>css</code>, <code>find</code>,
+                    <code>is</code>, <code>closest</code>, <code>toggleClass</code>,
+                    <code>extend</code>, <code>throttle</code>, <code>clone</code>,
+                    <code>index</code>, <code>nextTick</code>, <code>cancelNextTick</code>,
+                    <code>detectDirection</code>, <code>getChild</code> and <code>expando</code>.
+                </p>
+            </header>
+            <div class="toolbar">
+                <button class="btn btn-primary" ws-onclick="UtilsFind">find()</button>
+                <button class="btn" ws-onclick="UtilsIndex">index()</button>
+                <button class="btn" ws-onclick="UtilsIs">is()</button>
+                <button class="btn" ws-onclick="UtilsToggleClass">toggleClass()</button>
+                <button class="btn" ws-onclick="UtilsClosest">closest()</button>
+                <button class="btn" ws-onclick="UtilsCss">css()</button>
+                <button class="btn" ws-onclick="UtilsGetChild">getChild()</button>
+                <button class="btn" ws-onclick="UtilsDirection">detectDirection()</button>
+                <button class="btn" ws-onclick="UtilsNextTick">nextTick()</button>
+                <button class="btn" ws-onclick="UtilsCancelNextTick">cancelNextTick()</button>
+                <button class="btn" ws-onclick="UtilsClone">clone()</button>
+                <button class="btn" ws-onclick="UtilsExtend">extend()</button>
+                <button class="btn" ws-onclick="UtilsThrottle">throttle()</button>
+                <button class="btn" ws-onclick="UtilsOn">on()</button>
+                <button class="btn" ws-onclick="UtilsOff">off()</button>
+                <button class="btn" ws-onclick="UtilsExpando">expando</button>
+            </div>
+        </section>
+
+        <section class="card">
+            <header class="card-header">
+                <h2>Log</h2>
+                <p>
+                    Every listener in the sample appends a line here —
+                    <code>onStart</code>, <code>onChoose</code>, <code>onUnchoose</code>,
+                    <code>onSort</code>, <code>onUpdate</code>, <code>onAdd</code>,
+                    <code>onRemove</code>, <code>onChange</code>, <code>onEnd</code>,
+                    <code>onClone</code>, <code>onFilter</code>, <code>onMove</code>,
+                    <code>onSpill</code>, <code>onSelect</code> and <code>onDeselect</code>.
+                </p>
+            </header>
+            <pre class="log">${logText}</pre>
+        </section>
+    </main>
+
+    <script type="module" src="Scripts/WebSharper.SortableJs.Sample.min.js"></script>
+</body>
+</html>

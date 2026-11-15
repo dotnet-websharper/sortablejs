@@ -1,17 +1,11 @@
 {
   "name": "websharper.sortablejs.sample",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "private": true,
+  "devDependencies": {
+    "esbuild": "^0.19.9"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "sortablejs": "^1.15.6",
-    "vite": "^6.3.3"
+    "sortablejs": "^1.15.7"
   }
 }

@@ -1,0 +1,320 @@
+:root {
+  color-scheme: light;
+
+  --bg: #f6f7fb;
+  --surface: #ffffff;
+  --surface-alt: #f1f2f7;
+  --border: #e2e5ee;
+  --text: #1c2230;
+  --muted: #5b6472;
+  --primary: #4f46e5;
+  --primary-hover: #4338ca;
+  --primary-text: #ffffff;
+  --shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --code-bg: #f1f2f7;
+
+  --item-bg: #ffffff;
+  --item-border: #d9dde9;
+  --item-active: #eef2ff;
+  --ghost-bg: #c7d2fe;
+  --chosen-border: #4f46e5;
+  --drag-bg: #4f46e5;
+  --selected-bg: #dbeafe;
+  --selected-border: #2563eb;
+  --swap-outline: #f59e0b;
+  --drop-target: rgba(79, 70, 229, 0.10);
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: #0f1420;
+  --surface: #171d2b;
+  --surface-alt: #1f2637;
+  --border: #2b3446;
+  --text: #e8ecf6;
+  --muted: #9aa4b8;
+  --primary: #818cf8;
+  --primary-hover: #a5b4fc;
+  --primary-text: #0f1420;
+  --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 10px 30px rgba(0, 0, 0, 0.35);
+  --code-bg: #1f2637;
+
+  --item-bg: #1f2637;
+  --item-border: #33405a;
+  --item-active: #26314b;
+  --ghost-bg: #3730a3;
+  --chosen-border: #818cf8;
+  --drag-bg: #6366f1;
+  --selected-bg: #1e3a8a;
+  --selected-border: #60a5fa;
+  --swap-outline: #fbbf24;
+  --drop-target: rgba(129, 140, 248, 0.16);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--primary);
+}
+
+.app-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 28px 20px 12px;
+}
+
+.app-titles h1 {
+  margin: 0;
+  font-size: clamp(1.4rem, 3vw, 1.9rem);
+  letter-spacing: -0.02em;
+}
+
+.app-titles p {
+  margin: 2px 0 0;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.app-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-source {
+  font-size: 0.9rem;
+  text-decoration: none;
+  border-bottom: 1px dashed currentColor;
+}
+
+.page {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 8px 20px 64px;
+}
+
+.status {
+  margin: 12px 0 4px;
+  font-weight: 600;
+}
+
+.hint {
+  margin: 0 0 18px;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px;
+  margin-bottom: 20px;
+  box-shadow: var(--shadow);
+}
+
+.card-header h2 {
+  margin: 0 0 4px;
+  font-size: 1.05rem;
+}
+
+.card-header p {
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+code {
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 0.86em;
+}
+
+kbd {
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 5px;
+  padding: 1px 5px;
+  font-size: 0.8em;
+  background: var(--surface-alt);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.btn {
+  font: inherit;
+  font-size: 0.88rem;
+  padding: 7px 13px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--surface-alt);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.btn:hover {
+  border-color: var(--primary);
+}
+
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-text);
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+  border-color: var(--primary-hover);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.readout,
+.log {
+  margin: 14px 0 0;
+  padding: 14px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--code-bg);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 0.82rem;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.log {
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+/* ------------------------------------------------------------------ lists */
+
+.board {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.column {
+  flex: 1 1 220px;
+  min-width: 220px;
+}
+
+.column h3 {
+  margin: 0 0 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+ul.sortable-list {
+  margin: 0;
+  padding: 8px;
+  min-height: 120px;
+  list-style: none;
+  border: 2px dashed var(--border);
+  border-radius: 12px;
+  background: var(--surface-alt);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+ul.sortable-list li {
+  padding: 9px 11px;
+  border: 1px solid var(--item-border);
+  border-radius: 9px;
+  background: var(--item-bg);
+  cursor: grab;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+ul.sortable-list li.pinned {
+  cursor: not-allowed;
+  opacity: 0.7;
+  border-style: dotted;
+}
+
+.grip {
+  color: var(--muted);
+  letter-spacing: -2px;
+}
+
+.pin {
+  font-size: 0.85em;
+}
+
+.scroll-box {
+  max-height: 220px;
+  overflow-y: auto;
+  border-radius: 12px;
+}
+
+/* SortableJS classes driven by the `ghostClass`, `chosenClass`, `dragClass`,
+   `selectedClass` and `swapClass` options. */
+.sortable-ghost {
+  background: var(--ghost-bg) !important;
+  border-style: dashed !important;
+  opacity: 0.6;
+}
+
+.sortable-chosen {
+  border-color: var(--chosen-border) !important;
+  background: var(--item-active) !important;
+}
+
+.sortable-drag {
+  background: var(--drag-bg) !important;
+  color: #ffffff !important;
+  opacity: 0.95;
+  transform: rotate(1.5deg);
+}
+
+.multi-selected {
+  background: var(--selected-bg) !important;
+  border-color: var(--selected-border) !important;
+}
+
+.swap-highlight {
+  outline: 2px solid var(--swap-outline);
+  outline-offset: 1px;
+}
+
+.toggled {
+  text-decoration: line-through;
+  opacity: 0.7;
+}

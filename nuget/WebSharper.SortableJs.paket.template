@@ -15,7 +15,6 @@ tags
     Web JavaScript F# C# Sortable drag-and-drop
 files
     ../WebSharper.SortableJs/bin/Release/netstandard2.0/WebSharper.SortableJs.dll ==> lib/netstandard2.0
-    ../WebSharper.SortableJs/bin/Release/netstandard2.0/WebSharper.SortableJs.websharper ==> lib/netstandard2.0
     ../WebSharper.SortableJs/bin/Release/netstandard2.0/WebSharper.SortableJs.xml ==> lib/netstandard2.0
 dependencies
         WebSharper ~> LOCKEDVERSION:[3]

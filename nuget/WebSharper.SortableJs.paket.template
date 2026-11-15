@@ -1,0 +1,22 @@
+type file
+id WebSharper.SortableJs
+authors
+    IntelliFactory
+owners
+    IntelliFactory
+repositoryType git
+repositoryUrl https://github.com/dotnet-websharper/sortablejs/
+licenseUrl https://github.com/dotnet-websharper/sortablejs/blob/main/LICENSE.md
+iconUrl https://github.com/dotnet-websharper/core/raw/websharper50/tools/WebSharper.png
+projectUrl https://github.com/dotnet-websharper/sortablejs
+description
+    WebSharper bindings for SortableJS
+tags
+    Web JavaScript F# C# Sortable drag-and-drop
+files
+    ../WebSharper.SortableJs/bin/Release/netstandard2.0/WebSharper.SortableJs.dll ==> lib/netstandard2.0
+    ../WebSharper.SortableJs/bin/Release/netstandard2.0/WebSharper.SortableJs.websharper ==> lib/netstandard2.0
+    ../WebSharper.SortableJs/bin/Release/netstandard2.0/WebSharper.SortableJs.xml ==> lib/netstandard2.0
+dependencies
+        WebSharper ~> LOCKEDVERSION:[3]
+        WebSharper.TouchEvents ~> LOCKEDVERSION:[3]

@@ -1,29 +1,25 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <OutputType>Library</OutputType>
+    <WebSharperSourceMap>false</WebSharperSourceMap>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Include="Client.fs" />
-    <Compile Include="Startup.fs" />
+    <None Include="package.json" />
+    <None Include="esbuild.config.mjs" />
     <None Include="wsconfig.json" />
+    <Content Include="index.html" />
+    <Content Include="site.css" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="WebSharper" Version="9.0.1.549" />    
-    <PackageReference Include="WebSharper.FSharp" Version="9.0.1.549" />
-    <PackageReference Include="WebSharper.MathJS" Version="9.0.0.547" />
-    <PackageReference Include="WebSharper.UI" Version="9.0.0.547" />
-    <PackageReference Include="WebSharper.AspNetCore" Version="9.0.1.549" />
-  </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\WebSharper.SortableJs\WebSharper.SortableJs.fsproj" />
   </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="FSharp.Core" Version="9.0.202" />
-  </ItemGroup>
-
+  <Target Name="ESBuildBundle" AfterTargets="WebSharperCompile">
+    <Exec Command="npm install" />
+    <Exec Command="node ./esbuild.config.mjs" />
+  </Target>
+  <Import Project="..\.paket\Paket.Restore.targets" />
 </Project>
